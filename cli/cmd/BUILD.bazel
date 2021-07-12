@@ -10,7 +10,7 @@ go_library(
     importpath = "github.com/jrbeverly/gitpod-cobra-golang/cli/cmd",
     visibility = ["//visibility:public"],
     x_defs = {
-        "tool": "app",
+        "tool": "cobrago",
         "version": "{TOOL_VERSION}",
         "commit": "{STABLE_GIT_COMMIT}",
     },
