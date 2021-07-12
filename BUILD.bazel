@@ -23,10 +23,10 @@ pkg_tar(
 container_image(
     name = "go_image",
     base = "@go_image_base//image",
-    tars = [":image_package"],
     entrypoint = ["/usr/bin/cobrago"],
-    user = "nonroot",
     labels = {
-        "language-name": BAZEL_GOLANG_VERSION
-    }
+        "language-name": BAZEL_GOLANG_VERSION,
+    },
+    tars = [":image_package"],
+    user = "nonroot",
 )

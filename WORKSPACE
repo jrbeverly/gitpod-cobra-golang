@@ -47,10 +47,13 @@ go_register_toolchains(version = BAZEL_GOLANG_VERSION)
 gazelle_dependencies()
 
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
+
 rules_pkg_dependencies()
 
 load("@io_bazel_rules_docker//repositories:repositories.bzl", container_repositories = "repositories")
+
 container_repositories()
 
 load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
+
 _go_image_repos()

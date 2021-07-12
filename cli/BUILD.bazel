@@ -17,7 +17,7 @@ go_binary(
 go_binary(
     name = "cobrago_docker",
     embed = [":cobrago_commands"],
-    visibility = ["//visibility:public"],
-    goos = "linux",
     goarch = "amd64",
+    goos = "linux",
+    visibility = ["//visibility:public"],
 )
