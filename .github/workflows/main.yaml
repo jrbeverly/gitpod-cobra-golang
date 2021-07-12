@@ -1,0 +1,53 @@
+name: Build & Test
+on:
+  push:
+    paths:
+      - .github/workflows/main.yaml
+      - "**/*.go"
+      - "**/*.bazel"
+      - "WORKSPACE"
+      - ".bazelrc"
+      - "nogo_config.json"
+      - "go.mod"
+      - "go.sum"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GO111MODULE: on
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Format
+        run: if [ "$(gofmt -l `find . -name '*.go' | grep -v vendor` 2>&1)" ]; then exit 1; fi
+  build:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+    strategy:
+      matrix:
+        include:
+          - toolchain: linux_amd64
+          - toolchain: windows_amd64
+          - toolchain: darwin_amd64
+    timeout-minutes: 5
+    env:
+      GO111MODULE: on
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Format
+        run: if [ "$(gofmt -l `find . -name '*.go' | grep -v vendor` 2>&1)" ]; then exit 1; fi
+      - name: Build
+        run: bazel build --platforms=@io_bazel_rules_go//go/toolchain:${{ matrix.toolchain }} //:package
+      - name: Package
+        run: |
+          mkdir -p artifacts/
+          cp bazel-bin/package* artifacts/
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: cli-${{ matrix.toolchain }}
+          path: artifacts/
