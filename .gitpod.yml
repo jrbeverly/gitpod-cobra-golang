@@ -1,0 +1,15 @@
+checkoutLocation: "go/src/github.com/jrbeverly/gitpod-cobra-golang"
+workspaceLocation: "go/src/github.com/jrbeverly/gitpod-cobra-golang"
+
+github:
+    prebuilds:
+        pullRequestsFromForks: true
+image:
+  file: .gitpod/Dockerfile
+
+vscode:
+  extensions:
+    - golang.go
+    - ms-azuretools.vscode-docker
+    - bazelbuild.vscode-bazel
+
