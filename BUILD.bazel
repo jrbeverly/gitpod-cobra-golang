@@ -15,7 +15,7 @@ pkg_tar(
 
 pkg_tar(
     name = "image_package",
-    srcs = ["//cli:cobrago"],
+    srcs = ["//cli:cobrago_docker"],
     mode = "0755",
     package_dir = "/usr/bin/",
 )
