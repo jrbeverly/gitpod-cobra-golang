@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cmd",
+    srcs = [
+        "root.go",
+        "list.go",
+        "version.go",
+    ],
+    importpath = "github.com/jrbeverly/gitpod-cobra-golang/cli/cmd",
+    visibility = ["//visibility:public"],
+    x_defs = {
+        "tool": "app",
+        "version": "{TOOL_VERSION}",
+        "commit": "{STABLE_GIT_COMMIT}",
+    },
+    deps = [
+        "//internal/aws:aws",
+        "//internal/console:console",
+        "//lib/cobrago",
+        "@com_github_spf13_cobra//:cobra",
+    ],
+)
