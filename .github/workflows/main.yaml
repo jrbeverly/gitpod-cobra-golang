@@ -20,8 +20,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-      - name: Format
+      - name: Install buildozer
+        run: |
+          curl -sSL https://github.com/bazelbuild/buildtools/releases/download/4.0.1/buildifier-linux-amd64 > buildifier
+          chmod +x buildifier
+      - name: Format Golang
         run: if [ "$(gofmt -l `find . -name '*.go' | grep -v vendor` 2>&1)" ]; then exit 1; fi
+      - name: Format Bazel
+        run: ./buildifier  -mode check -r .
   build:
     runs-on: ubuntu-latest
     needs:
