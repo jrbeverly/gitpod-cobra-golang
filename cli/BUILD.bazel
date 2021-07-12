@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 go_library(
     name = "cobrago_commands",
     srcs = ["main.go"],
-    importpath = "github.com/jrbeverly/gitpod-cobra-golang/app",
+    importpath = "github.com/jrbeverly/gitpod-cobra-golang/cli",
     visibility = ["//visibility:private"],
     deps = ["//cli/cmd"],
 )
