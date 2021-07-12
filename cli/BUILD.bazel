@@ -16,6 +16,7 @@ go_binary(
 
 go_binary(
     name = "cobrago_docker",
+    out = "cobrago",
     embed = [":cobrago_commands"],
     goarch = "amd64",
     goos = "linux",
